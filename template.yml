@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Bucket de ejemplo para practicar parámetros en CloudFormation
+
+Parameters:
+  Environment:
+    Type: String
+    Description: Ambiente para etiquetar el bucket
+    AllowedValues:
+      - dev
+      - test
+      - prod
+    Default: dev
+
+Resources:
+  DemoBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      Tags:
+        - Key: Environment
+          Value: !Ref Environment
