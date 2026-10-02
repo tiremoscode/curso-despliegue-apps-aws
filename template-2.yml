@@ -1,0 +1,10 @@
+Resources:
+  BucketCurso:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${NombreProyecto}-${AWS::AccountId}-${AWS::Region}"
+
+Outputs:
+  NombreBucket:
+    Description: Nombre del bucket creado
+    Value: !Ref BucketCurso
