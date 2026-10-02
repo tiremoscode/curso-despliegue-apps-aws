@@ -1,10 +1,3 @@
-Resources:
-  BucketCurso:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: !Sub "${NombreProyecto}-${AWS::AccountId}-${AWS::Region}"
-
-Outputs:
-  NombreBucket:
-    Description: Nombre del bucket creado
-    Value: !Ref BucketCurso
+template-file-path: template-2.yml
+parameters: {}
+tags: {}
