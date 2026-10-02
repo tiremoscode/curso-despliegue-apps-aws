@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Bucket de práctica para el módulo de IaC
+
+Parameters:
+  NombreProyecto:
+    Type: String
+    Default: curso-iac
+    Description: Prefijo para identificar el proyecto
+
+Resources:
+  BucketCurso:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${NombreProyecto}-${AWS::AccountId}-${AWS::Region}"
+
+Outputs:
+  NombreBucket:
+    Description: Nombre del bucket creado
+    Value: !Ref BucketCurso
