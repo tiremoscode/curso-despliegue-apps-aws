@@ -1,0 +1,52 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Bucket de ejemplo con parámetros y configuración adicional
+
+Parameters:
+  Environment:
+    Type: String
+    Description: Ambiente para etiquetar el bucket
+    AllowedValues:
+      - dev
+      - test
+      - prod
+    Default: dev
+
+  ProjectName:
+    Type: String
+    Description: Nombre corto del proyecto
+    Default: curso-iac
+
+Resources:
+  DemoBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${ProjectName}-${Environment}-${AWS::AccountId}-${AWS::Region}"
+
+      VersioningConfiguration:
+        Status: Enabled
+
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+
+      Tags:
+        - Key: Environment
+          Value: !Ref Environment
+        - Key: Project
+          Value: !Ref ProjectName
+
+Outputs:
+  BucketName:
+    Description: Nombre del bucket creado
+    Value: !Ref DemoBucket
+
+  BucketArn:
+    Description: ARN del bucket creado
+    Value: !GetAtt DemoBucket.Arn
