@@ -1,0 +1,18 @@
+{
+  "name": "clients-crud",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CRUD de clientes: frontend React + backend Express",
+  "workspaces": ["frontend", "backend"],
+  "scripts": {
+    "install:all": "npm install",
+    "dev": "concurrently -n backend,frontend -c blue,green \"npm run dev -w backend\" \"npm run dev -w frontend\"",
+    "build": "npm run build -w frontend",
+    "start": "npm run start -w backend",
+    "test": "npm test -w backend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  },
+  "engines": { "node": ">=18" }
+}
